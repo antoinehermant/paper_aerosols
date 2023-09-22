@@ -1,0 +1,26 @@
+Simple Plume Version 1.0 Release
+
+Authors:  Bjorn Stevens, Stephanie Fiedler, Stefan Kinne, Karsten Peters
+Date: 11, November 2016
+
+The Simple Plume Aerosol Climatology consists of two files.
+    1. mo_simple_plumes_v1.f90:  An F90 module which a driving program needs to be ported to for execution.
+    2. MACv2.0-SP_v1.nc:  The input data for the mo_simple-plumes-v1 fortran module.
+
+Supplementary files for understanding and using the climatology:
+    1. sp_driver_v1.f90:  A driver program for creating climatological output offline
+    2. sp_make-data_v1.ncl:  The ncl script used to create the input data (MACv2.0-SP_v1.nc) for the simple plume model
+    3. orography_T63.nc: A file containing orographic heights at a T63 resolution.
+    4. Sample yearly files created using the driver program may also be included, depending on the distribution.
+
+Main Idea:
+    1. To have a simple description of the anthropogenic aerosol optical properties (including twomey effect) that enables the identification of robust responses to an aerosol perturbation across models.
+    2. To describe the climatology in a way that is transparent, traceable, and facilitates experimentation.
+
+Brief Description:
+    The Simple Plume Aerosol cClimatology describes anthropogenic SW aerosol optical properties and the proportional change in cloud-droplet effective radius resulting from anthropogenic aerosol perturbations as a function of latitude, longitude, height above the ground, wave-length, and time (between 1850 and 2100).   The code is documented in Stevens, Fiedler, Peters et al, currently in discussion in GMDD (doi:10.5194/gmd-2016-189)
+
+Notes:
+   1. The current implementation uses fixed single scattering albedo (SSA) and asymmetry parameters, which leads to some small apparent discontinuities; for instance, in SSA near the South American Coast.  Because the radiation code uses the optical depth weighed SSA this issue is much less relevant than it would otherwise seem and not evident in simulations using the climatology, even when performing analysis based on double radiation call.s 
+   2. The code has been compiled on different machines using the ifort, nagfor and gfortran compilers and produces identical results. 
+

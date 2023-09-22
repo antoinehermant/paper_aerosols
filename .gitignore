@@ -1,0 +1,14 @@
+*.png
+*.aux
+*.fls
+*.log
+*.fdb_latexmk
+*.bbl
+*.gz
+*.blg
+*.mp4
+*.nc
+archives/
+summary/
+trackchanges*
+*.cls
