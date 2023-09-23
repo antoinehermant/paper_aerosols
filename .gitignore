@@ -12,3 +12,4 @@ archives/
 summary/
 trackchanges*
 *.cls
+*rclone*
