@@ -78,19 +78,19 @@ def plot_figure():
                 subplots[effect].plot(X, X*reg.coef_ + reg.intercept_, linewidth=1, linestyle='-')
                 coefs['clear-sky'][label] = reg.coef_
 
-    ax1.annotate(str(round(coefs['direct']['Europe']*1000,2))+r'$\cdot10^{-3}$', [0.89, 0.8],xycoords="axes fraction", fontsize=8)
+    ax1.annotate(str(round(coefs['direct']['Europe']*1000,2))+r'$\cdot10^{-3}$', [0.86, 0.82],xycoords="axes fraction", fontsize=8)
     ax1.annotate(str(round(coefs['direct']['North America']*1000,2))+r'$\cdot10^{-3}$', [0.66, 0.72],xycoords="axes fraction", fontsize=8)
     ax1.annotate(str(round(coefs['direct']['East Asia']*1000,2))+r'$\cdot10^{-3}$', [0.78, 0.5],xycoords="axes fraction", fontsize=8)
     ax1.annotate(str(round(coefs['direct']['South Asia']*1000,2))+r'$\cdot10^{-3}$', [0.45, 0.02],xycoords="axes fraction", fontsize=8)
 
-    ax3.annotate(str(round(coefs['clear-sky']['Europe']*1000,2))+r'$\cdot10^{-3}$', [0.99, 0.00],xycoords="axes fraction", fontsize=8)
+    ax3.annotate(str(round(coefs['clear-sky']['Europe']*1000,2))+r'$\cdot10^{-3}$', [0.97, -0.02],xycoords="axes fraction", fontsize=8)
     ax3.annotate(str(round(coefs['clear-sky']['North America']*1000,2))+r'$\cdot10^{-3}$', [0.66, 0.55],xycoords="axes fraction", fontsize=8)
     ax3.annotate(str(round(coefs['clear-sky']['East Asia']*1000,2))+r'$\cdot10^{-3}$', [0.78, 0.3],xycoords="axes fraction", fontsize=8)
     ax3.annotate(str(round(coefs['clear-sky']['South Asia']*1000,2))+r'$\cdot10^{-3}$', [0.44, 0.02],xycoords="axes fraction", fontsize=8)
     
     ax1.set_title('Direct effect', pad=20)
     ax1.annotate('a)', [-0.15, 1.1],xycoords="axes fraction", fontsize=13)
-    ax1.xaxis.set_label_coords(.82, .95)
+    ax1.xaxis.set_label_coords(.82, .97)
     ax1.set_ylim([-0.205, 0.003])
     ax1.set_yticks([-0.2, -.15, -0.1, -0.05, 0])
     ax1.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  

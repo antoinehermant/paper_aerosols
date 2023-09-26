@@ -22,17 +22,20 @@ def effect_map(ax, effect, type, year, sub):
         r = 'rad0'
     elif type == 'clear-sky':
         r = 'raf0'
-        title = 'Clear-sky Aerosol Radiative Forcing'
     
     if effect == 'total':
         forcing = dataset[f'dR_sp_s{r}'] + dataset[f'dR_sp_t{r}']
-        title = 'Total Aerosol Radiative Forcing'
+        title = 'Total Aerosol Effect (all-sky)'
     elif effect == 'direct':
         forcing = dataset[f'dR_spd_s{r}'] + dataset[f'dR_spd_t{r}']
-        title = 'Aerosol Direct Effect'
+        title = 'Aerosol Direct Effect (all-sky)'
     elif effect == 'indirect':
         forcing = dataset[f'dR_spi_s{r}'] + dataset[f'dR_spi_t{r}']
-        title = 'Aerosol Indirect Effect'
+        title = 'Aerosol Indirect Effect (all-sky)'
+    
+    if type == 'clear-sky':
+        r = 'raf0'
+        title = 'Clear-sky Aerosol Effect'
     
     var = forcing
     lon = var.coords['lon']
