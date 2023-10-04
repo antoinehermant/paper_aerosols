@@ -34,7 +34,7 @@ def plot():
     ax1.set_xlabel('Year', fontsize=fs)
     ax1.set_xlim([1850, 2013])
     plt.xticks(np.arange(1850, 2001, 50))
-    ax1.set_ylabel(r'Emissions [Tg SO$_2$]', fontsize=fs, labelpad=30)
+    ax1.set_ylabel(r'Emissions [Tg SO$_2$-eq]', fontsize=fs, labelpad=30)
     ax1.set_yticks([0, 25, 50, 75, 100])
     ax1.yaxis.set_label_coords(-.11,0.71)
 
