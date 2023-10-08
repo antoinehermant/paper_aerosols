@@ -11,6 +11,5 @@
 archives/
 summary/
 trackchanges*
-*.cls
 *rclone*
 papers/
