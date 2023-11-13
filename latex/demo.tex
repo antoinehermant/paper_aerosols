@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{amsmath} % for additional math functionality
+\begin{document}
+
+Numerical demo:
+\\\\
+Let's take 2 absorbing surfaces with arbitrary overlying aerosol forcings:
+\\\\
+For $\alpha_1 = 0.2 \rightarrow F_1 = -10$ W.m $^{-2}$ 
+\\
+For $\alpha_2 = 0.1 \rightarrow F_2 = 2*F_1 = -20$ W.m $^{-2}$
+\\
+$$F_1*\alpha_1 = -10*0.2 = -2$$
+$$F_2*\alpha_2 = -20*0.1 = -2$$
+\\
+In this example, surface 2 is twice as absorbing as surface 1. The induced aerosol forcing above surface 2 should be twice as great as above surface 1. We see that if we multiply the aerosol forcing by the surface albedo for both surfaces, we get the same value.
+\\ 
+This works if aerosol forcing directly proportional to surface albedo (which is suggested in my plots)
+\\
+Another way to see it is that the forcing is anti proportional to albedo, so we should normalise by the inverse of the albedo (which is same as multiplying):
+$$\rightarrow \frac{F}{1/\alpha} = F*\alpha$$
+\\\\
+For positive forcing:
+$$\rightarrow \frac{F}{1/(1-\alpha)} = F*(1-\alpha)$$
+
+But:
+\\
+$$\frac{F_1}{(1 - \alpha_1)} = \frac{-20}{0.8} = -20*1.1 = 22$$
+$$\frac{F_2}{(1 - \alpha_2)} = \frac{-10}{0.9} = -10*1.25 = 12.5$$
+\\
+Not linear, not the same as normalising because albedo = ]0;1[
+\\\\
+Thus I do think we have to multiply by the surface albedo, but it gives annoying units. Maybe we can think about a different plot that better shows the relationship. \\\\
+For reflective surfaces (or induced positive aerosol forcing):
+\\\\
+For $\alpha_3 = 0.8 \rightarrow F_3 = 10$ W.m $^{-2}$ 
+\\
+For $\alpha_4 = 0.9 \rightarrow F_4 = 20$ W.m $^{-2}$
+\\
+$$F_3*\alpha_3 = -20*0.1 = -2$$
+$$F_4*\alpha_4 = -10*0.2 = -2$$
+\\
+In this example, surface 1 is twice as absorbing as surface 2. The induced aerosol forcing above surface 1 should be twice as great as above surface 2. We see that if we multiply the aerosol forcing by the surface albedo for both surfaces, we get the same value.
+\\ 
+This works if aerosol forcing directly proportional to surface albedo (which is suggested in my plots)
+\\\\
+But:
+\\
+\end{document}

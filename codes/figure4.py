@@ -50,8 +50,10 @@ def plot_figure():
             label = MACSP.attrs[f'plume{plume_number}_region']
             clearsky = dataset[f'dR_spd{plume_number}_sraf0'] + dataset[f'dR_spd{plume_number}_traf0']
             aod = dataset[f'aod_sp{plume_number}']
-            albedo = - (dataset.sraf0 - dataset.srad0d)/(dataset.srad0d)  #clear-sky albedo
-            albedo_ssa = - (dataset_ssa.sraf0 - dataset_ssa.srad0d)/(dataset_ssa.srad0d)
+            #albedo = 1 - (dataset.srafs)/(dataset.srad0d)  #clear-sky albedo
+            albedo = 1 / (1 - (- dataset.sradsu /(dataset.srads + dataset.sradsu)))
+            #albedo_ssa = 1 - (dataset_ssa.srafs)/(dataset_ssa.srad0d)
+            albedo_ssa = - dataset_ssa.sradsu /(dataset_ssa.srads - dataset_ssa.sradsu)
             clearsky_ssa = dataset_ssa[f'dR_spd{plume_number}_sraf0'] + dataset_ssa[f'dR_spd{plume_number}_traf0']
 
             if effect == 'clear-sky':
