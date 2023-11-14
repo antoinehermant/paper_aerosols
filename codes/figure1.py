@@ -61,8 +61,8 @@ def plot():
     leg = ax2.legend(handles=legend_elements, frameon=True, ncol=1, labels=labels, fontsize=fs,
     handletextpad=0.5, handlelength=1.0, loc=(0.05,0.05))
 
-    ax1.axvline(x=1972, color='black', linewidth=0.3, linestyle='--')
-    ax1.axvline(x=2005, color='black', linewidth=0.3, linestyle='--')
+    #ax1.axvline(x=1972, color='black', linewidth=0.3, linestyle='--')
+    #ax1.axvline(x=2005, color='black', linewidth=0.3, linestyle='--')
     plt.subplots_adjust(wspace=0.4)
 
     leg.set_zorder(1)

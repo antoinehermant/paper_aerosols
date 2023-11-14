@@ -42,9 +42,9 @@ def plot_figure():
             spine.set_zorder(20)
         ax.set_xlim([-0.5, 51])
         ax.set_xlabel(r"Emissions [Tg SO$_2$]")
+        ax.xaxis.set_label_coords(.55, 1.13)
         ax.tick_params(axis='x', direction='out', which='major', pad=-15)
-
-
+        
     coefs = pd.DataFrame({'direct': [0,0,0,0,0,0,0,0,0],
                   'clear-sky': [0,0,0,0,0,0,0,0,0]},
                    index=['Europe', 'North America', 'East Asia', 'South Asia', 'North Africa', 'South America', 'Maritime Continent', 'South Central Africa', 'Australia'])
@@ -88,23 +88,23 @@ def plot_figure():
     ax3.annotate(str(round(coefs['clear-sky']['East Asia']*1000,2))+r'$\cdot10^{-3}$', [0.78, 0.3],xycoords="axes fraction", fontsize=8)
     ax3.annotate(str(round(coefs['clear-sky']['South Asia']*1000,2))+r'$\cdot10^{-3}$', [0.44, 0.02],xycoords="axes fraction", fontsize=8)
     
-    ax1.set_title('Direct effect', pad=20)
-    ax1.annotate('a)', [-0.15, 1.1],xycoords="axes fraction", fontsize=13)
-    ax1.xaxis.set_label_coords(.82, .97)
+   # ax1.set_title('Direct effect', pad=20)
+    ax1.annotate('a) Aerosol Direct Effect', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    #ax1.xaxis.set_label_coords(.55, 1.13)
     ax1.set_ylim([-0.205, 0.003])
     ax1.set_yticks([-0.2, -.15, -0.1, -0.05, 0])
     ax1.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
     ax1.tick_params(axis='y', direction='in', which='both', pad=5)
    
-    ax2.annotate('b)', [-0.05, 1.1],xycoords="axes fraction", fontsize=13)
-    ax2.set_title('Indirect effect', pad=20)
-    ax2.xaxis.set_label_coords(.82, .95)
+    ax2.annotate('b) Aerosol Indirect Effect', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    #ax2.set_title('Indirect effect', pad=20)
+    #ax2.xaxis.set_label_coords(.82, .95)
     ax2.set_ylim([-0.205, 0.003])
     ax2.tick_params(axis='y', labelleft=False, which='both', direction='in')
 
-    ax3.annotate('c)', [-0.15, 1.1],xycoords="axes fraction", fontsize=13)
-    ax3.set_title('Clear-sky', pad=20)
-    ax3.xaxis.set_label_coords(.82, .95)
+    ax3.annotate('c) Clear-sky Aerosol Effect', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    #ax3.set_title('Clear-sky', pad=20)
+    #ax3.xaxis.set_label_coords(.82, .95)
     ax3.set_ylim([-0.36, 0.005])
     ax3.set_yticks([-0.3, -.2, -0.1, 0])
     ax3.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
@@ -115,7 +115,7 @@ def plot_figure():
     leg.set_zorder(1)
     fig = plt.gcf()
     fig.set_size_inches(9, 7.5)
-    fig.subplots_adjust(hspace=0.3)
+    fig.subplots_adjust(hspace=0.4)
     fig.subplots_adjust(wspace=0.1)
 
     plt.savefig(f'{figure_dir}/figure2.pdf', bbox_inches='tight')

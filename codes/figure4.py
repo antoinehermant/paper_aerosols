@@ -26,12 +26,12 @@ def plot_figure():
     fig = plt.figure()
     gs = GridSpec(2,2)
     ax1 = fig.add_subplot(gs[0, 0])
-    ax2 = fig.add_subplot(gs[1, 0], sharex=ax1)
-    ax3 = fig.add_subplot(gs[1, 1], sharey=ax2, sharex=ax1)
+    ax2 = fig.add_subplot(gs[0, 1], sharex=ax1, sharey=ax1)
+    #ax3 = fig.add_subplot(gs[0, 1], sharey=ax2, sharex=ax1)
 
     effects = ['clear-sky', 'clear-sky-alb','ssa']
 
-    for ax in [ax1, ax2, ax3]:
+    for ax in [ax1, ax2]:
         ax.spines['bottom'].set_position('zero')
         ax.spines['right'].set_color('none')
         ax.spines['top'].set_color('none')
@@ -39,6 +39,9 @@ def plot_figure():
         for k, spine in ax.spines.items():
             spine.set_zorder(20)
         ax.set_xlim([-0.0001, 0.0082])
+        ax.xaxis.set_label_coords(.55, 1.13)
+        ax.set_ylim([-0.38, 0.008])
+        ax.tick_params(axis='x', direction='out', which='major', pad=-16)
 
     coefs = pd.DataFrame({'clear-sky': [0,0,0,0,0,0,0,0,0],
                   'clear-sky-alb': [0,0,0,0,0,0,0,0,0]},
@@ -51,7 +54,7 @@ def plot_figure():
             clearsky = dataset[f'dR_spd{plume_number}_sraf0'] + dataset[f'dR_spd{plume_number}_traf0']
             aod = dataset[f'aod_sp{plume_number}']
             #albedo = 1 - (dataset.srafs)/(dataset.srad0d)  #clear-sky albedo
-            albedo = 1 / (1 - (- dataset.sradsu /(dataset.srads + dataset.sradsu)))
+            #albedo = 1 / (1 - (- dataset.sradsu /(dataset.srads + dataset.sradsu)))
             #albedo_ssa = 1 - (dataset_ssa.srafs)/(dataset_ssa.srad0d)
             albedo_ssa = - dataset_ssa.sradsu /(dataset_ssa.srads - dataset_ssa.sradsu)
             clearsky_ssa = dataset_ssa[f'dR_spd{plume_number}_sraf0'] + dataset_ssa[f'dR_spd{plume_number}_traf0']
@@ -65,36 +68,33 @@ def plot_figure():
                 ax1.plot(X, x*reg.coef_ + reg.intercept_, linewidth=1, linestyle='-')
                 coefs['clear-sky'][label] = reg.coef_
 
-            if effect == 'clear-sky-alb':
-                x = WeightedMean(aod)
-                X = x.values.reshape(-1, 1)
-                y = WeightedMean(clearsky*(albedo))
-                reg = LinearRegression().fit(X, y)
-                ax2.scatter(x, y, label=label, s=ms, zorder=zorder[plume_number-1], marker='x', linewidths=0.8)
-                ax2.plot(X, X*reg.coef_ + reg.intercept_, linewidth=1, linestyle='-')
-                coefs['clear-sky-alb'][label] = reg.coef_
+            #if effect == 'clear-sky-alb':
+            #    x = WeightedMean(aod)
+            #    X = x.values.reshape(-1, 1)
+            #    y = WeightedMean(clearsky*(albedo))
+            #    reg = LinearRegression().fit(X, y)
+            #    ax2.scatter(x, y, label=label, s=ms, zorder=zorder[plume_number-1], marker='x', linewidths=0.8)
+            #    ax2.plot(X, X*reg.coef_ + reg.intercept_, linewidth=1, linestyle='-')
+            #    coefs['clear-sky-alb'][label] = reg.coef_
 
             if effect == 'ssa':
-                ax3.scatter(WeightedMean(dataset_ssa[f'aod_sp{plume_number}']), WeightedMean(clearsky_ssa*albedo_ssa), label=label, s=ms*0.6, zorder=zorder[plume_number-1])
+                ax2.scatter(WeightedMean(dataset_ssa[f'aod_sp{plume_number}']), WeightedMean(clearsky_ssa), label=label, s=ms*0.6, zorder=zorder[plume_number-1])
 
     ax1.annotate(str(round(coefs['clear-sky']['Europe'],3)), [0.85, 0.02],xycoords="axes fraction", fontsize=10)
     ax1.annotate(str(round(coefs['clear-sky']['North America'],3)), [0.12, 0.55],xycoords="axes fraction", fontsize=10)
     ax1.annotate(str(round(coefs['clear-sky']['East Asia'],3)), [0.37, 0.32],xycoords="axes fraction", fontsize=10)
     ax1.annotate(str(round(coefs['clear-sky']['South Asia'],3)), [0.58, 0.06],xycoords="axes fraction", fontsize=10)
 
-    ax2.annotate(str(round(coefs['clear-sky-alb']['Europe'],3)), [0.88, 0.0],xycoords="axes fraction", fontsize=10)
-    ax2.annotate(str(round(coefs['clear-sky-alb']['North America'],3)), [0.12, 0.6],xycoords="axes fraction", fontsize=10)
-    ax2.annotate(str(round(coefs['clear-sky-alb']['East Asia'],3)), [0.41, 0.39],xycoords="axes fraction", fontsize=10)
-    ax2.annotate(str(round(coefs['clear-sky-alb']['South Asia'],3)), [0.6, 0.2],xycoords="axes fraction", fontsize=10)
+    #ax2.annotate(str(round(coefs['clear-sky-alb']['Europe'],3)), [0.88, 0.0],xycoords="axes fraction", fontsize=10)
+    #ax2.annotate(str(round(coefs['clear-sky-alb']['North America'],3)), [0.12, 0.6],xycoords="axes fraction", fontsize=10)
+    #ax2.annotate(str(round(coefs['clear-sky-alb']['East Asia'],3)), [0.41, 0.39],xycoords="axes fraction", fontsize=10)
+    #ax2.annotate(str(round(coefs['clear-sky-alb']['South Asia'],3)), [0.6, 0.2],xycoords="axes fraction", fontsize=10)
 
-    ax1.annotate('a)', [-0.15, 1.1],xycoords="axes fraction", fontsize=13)
-    ax1.set_title('Clear-sky', pad=20)
+    ax1.annotate('a) Clear-sky Aerosol Forcing', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    #ax1.set_title('Clear-sky', pad=20)
     ax1.set_xlabel(r"Global Mean AOD")
-    ax1.xaxis.set_label_coords(.82, .95)  
     ax1.set_yticks([-0.3, -0.2, -0.1, 0])
-    ax1.set_ylim([None, 0.003])
     ax1.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
-    ax1.tick_params(axis='x', direction='out', which='major', pad=-15)
     ax1.tick_params(axis='y', direction='in', which='both', pad=5)
 
     formatter_x = ticker.FormatStrFormatter('%.3f')
@@ -113,26 +113,13 @@ def plot_figure():
     ax1.yaxis.set_major_formatter(ticker.FuncFormatter(custom_formatter))
     ax2.yaxis.set_major_formatter(ticker.FuncFormatter(custom_formatter))
     
-    ax2.annotate('b)', [-0.15, 1.1],xycoords="axes fraction", fontsize=13)
-    ax2.set_title('Clear-sky with Surface Albedo', pad=20)
+    ax2.annotate('b) Clear-sky with Equal SSA', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    #ax2.set_title('Clear-sky with Surface Albedo', pad=20)
     ax2.set_xlabel(r"Global Mean AOD")
-    ax2.xaxis.set_label_coords(.82, .95)
-    ax2.tick_params(axis='x', direction='in', which='major', pad=-15)
-    ax2.set_yticks([-0.06, -0.04, -0.02, 0])
-    ax2.set_ylim([None, 0.001])
-    ax2.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
-    ax2.tick_params(axis='x', direction='out', which='major', pad=-18)
-    ax2.tick_params(axis='y', direction='in', which='both', pad=5)
+    ax2.tick_params(axis='y', direction='in', which='both', labelleft=False)
 
-    ax3.annotate('c)', [-0.05, 1.1],xycoords="axes fraction", fontsize=13)
-    ax3.set_title(' Clear-sky with Surface Albedo - equal SSA', pad=20)
-    ax3.set_xlabel(r"Global Mean AOD")
-    ax3.xaxis.set_label_coords(.82, .95)
-    ax3.tick_params(axis='x', direction='out', which='major', pad=-18)
-    ax3.tick_params(axis='y', direction='in', which='both', labelleft=False)
-
-    leg = ax3.legend(frameon=True, ncol=1,
-                handletextpad=0.5, handlelength=1.0, loc=(.15,1.4), markerscale=1.8)
+    leg = ax2.legend(frameon=True, ncol=1,
+                handletextpad=0.5, handlelength=1.0, loc=(-0.35,-0.8), markerscale=1.8)
     leg.set_zorder(1)
     fig = plt.gcf()
     fig.set_size_inches(9, 7.5)
