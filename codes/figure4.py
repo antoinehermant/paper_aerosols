@@ -26,7 +26,7 @@ def plot_figure():
     fig = plt.figure()
     gs = GridSpec(2,2)
     ax1 = fig.add_subplot(gs[0, 0])
-    ax2 = fig.add_subplot(gs[0, 1], sharex=ax1, sharey=ax1)
+    ax2 = fig.add_subplot(gs[1, 0], sharex=ax1, sharey=ax1)
     #ax3 = fig.add_subplot(gs[0, 1], sharey=ax2, sharex=ax1)
 
     effects = ['clear-sky', 'clear-sky-alb','ssa']
@@ -42,6 +42,8 @@ def plot_figure():
         ax.xaxis.set_label_coords(.55, 1.13)
         ax.set_ylim([-0.38, 0.008])
         ax.tick_params(axis='x', direction='out', which='major', pad=-16)
+        ax.tick_params(axis='y', direction='in', which='both', pad=5)
+        ax.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
 
     coefs = pd.DataFrame({'clear-sky': [0,0,0,0,0,0,0,0,0],
                   'clear-sky-alb': [0,0,0,0,0,0,0,0,0]},
@@ -90,11 +92,10 @@ def plot_figure():
     #ax2.annotate(str(round(coefs['clear-sky-alb']['East Asia'],3)), [0.41, 0.39],xycoords="axes fraction", fontsize=10)
     #ax2.annotate(str(round(coefs['clear-sky-alb']['South Asia'],3)), [0.6, 0.2],xycoords="axes fraction", fontsize=10)
 
-    ax1.annotate('a) Clear-sky Aerosol Forcing', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    ax1.annotate('a) Clear-sky Aerosol Forcing', [-0.17, 1.2],xycoords="axes fraction", fontsize=13)
     #ax1.set_title('Clear-sky', pad=20)
     ax1.set_xlabel(r"Global Mean AOD")
     ax1.set_yticks([-0.3, -0.2, -0.1, 0])
-    ax1.set_ylabel("Radiative Forcing [Wm$^{-2}$]")  
     ax1.tick_params(axis='y', direction='in', which='both', pad=5)
 
     formatter_x = ticker.FormatStrFormatter('%.3f')
@@ -113,17 +114,17 @@ def plot_figure():
     ax1.yaxis.set_major_formatter(ticker.FuncFormatter(custom_formatter))
     ax2.yaxis.set_major_formatter(ticker.FuncFormatter(custom_formatter))
     
-    ax2.annotate('b) Clear-sky with Equal SSA', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    ax2.annotate('b) Clear-sky Aerosol Forcing with Equal SSA', [-0.17, 1.2],xycoords="axes fraction", fontsize=13)
     #ax2.set_title('Clear-sky with Surface Albedo', pad=20)
     ax2.set_xlabel(r"Global Mean AOD")
-    ax2.tick_params(axis='y', direction='in', which='both', labelleft=False)
+    #ax2.tick_params(axis='y', direction='in', which='both', labelleft=False)
 
     leg = ax2.legend(frameon=True, ncol=1,
-                handletextpad=0.5, handlelength=1.0, loc=(-0.35,-0.8), markerscale=1.8)
+                handletextpad=0.5, handlelength=1.0, loc=(1.15,0.65), markerscale=1.8)
     leg.set_zorder(1)
     fig = plt.gcf()
     fig.set_size_inches(9, 7.5)
-    fig.subplots_adjust(hspace=0.3)
+    fig.subplots_adjust(hspace=0.4)
     fig.subplots_adjust(wspace=0.1)
 
     plt.savefig(f'{figure_dir}/figure4.pdf', bbox_inches='tight')

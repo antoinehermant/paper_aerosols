@@ -89,7 +89,7 @@ def plot_figure():
     ax3.annotate(str(round(coefs['clear-sky']['South Asia']*1000,2))+r'$\cdot10^{-3}$', [0.44, 0.02],xycoords="axes fraction", fontsize=8)
     
    # ax1.set_title('Direct effect', pad=20)
-    ax1.annotate('a) Aerosol Direct Effect', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    ax1.annotate('a) Aerosol Direct Effect', [-0.17, 1.2],xycoords="axes fraction", fontsize=13)
     #ax1.xaxis.set_label_coords(.55, 1.13)
     ax1.set_ylim([-0.205, 0.003])
     ax1.set_yticks([-0.2, -.15, -0.1, -0.05, 0])
@@ -102,7 +102,7 @@ def plot_figure():
     ax2.set_ylim([-0.205, 0.003])
     ax2.tick_params(axis='y', labelleft=False, which='both', direction='in')
 
-    ax3.annotate('c) Clear-sky Aerosol Effect', [-0.05, 1.2],xycoords="axes fraction", fontsize=13)
+    ax3.annotate('c) Clear-sky Aerosol Effect', [-0.17, 1.2],xycoords="axes fraction", fontsize=13)
     #ax3.set_title('Clear-sky', pad=20)
     #ax3.xaxis.set_label_coords(.82, .95)
     ax3.set_ylim([-0.36, 0.005])
