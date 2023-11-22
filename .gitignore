@@ -13,3 +13,5 @@ summary/
 trackchanges*
 *rclone*
 papers/
+Hermant_et_al_data_and_scripts/
+*.zip
